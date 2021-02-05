@@ -4,7 +4,7 @@ var dbConn = require('../config/db.config');
 //destination object create
 var Destination = function (destination) {
     this.id_sms = destination.id_sms;
-    this.id_contact = destination.id_contact;
+    this.id_contact = destination.id_contact; 
 };
 
 Destination.create = function (newdestination, result) {

@@ -35,6 +35,29 @@ User.findById = function (id, result) {
         }
     });
 };
+
+User.findByLogin = function (login, result) {
+    dbConn.query("Select * from user where login = ? ", login, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+};
+
+User.findUser = function(login, result) {
+    dbConn.query("Select * from user where login = ? ", login, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+}
+
 User.findAll = function (result) {
     dbConn.query("Select * from user", function (err, res) {
         if (err) {

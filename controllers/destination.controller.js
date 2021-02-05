@@ -2,6 +2,10 @@
 
 const Destination = require('../models/destination.model');
 
+const passport = require('../passport/passport-config')
+
+
+
 exports.findAll = function (req, res) {
     Destination.findAll(function (err, destination) {
         if (err)
