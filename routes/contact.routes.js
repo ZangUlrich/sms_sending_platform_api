@@ -7,6 +7,7 @@ const contactController = require('../controllers/contact.controller');
 // authentication middleware
 router.use( passport.authenticate('jwt',{session: false}));
 
+
 // Retrieve all contacts
 router.get('/', contactController.findAll);
 // Create a new contact

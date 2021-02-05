@@ -1,7 +1,9 @@
 'use strict';
 
 const Destination = require('../models/destination.model');
+
 const passport = require('../passport/passport-config')
+
 
 
 exports.findAll = function (req, res) {
@@ -19,7 +21,7 @@ exports.create = function (req, res) {
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
         res.status(400).send({error: true, message: 'Please provide all required field'});
     } else {
-        destination.create(new_destination, function (err, destination) {
+        Destination.create(new_destination, function (err, destination) {
             if (err)
                 res.send(err);
             res.status(201).send({error: false, message: "destination added successfully!", data: destination });
