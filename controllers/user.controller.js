@@ -33,8 +33,15 @@ exports.findById = function (req, res) {
     User.findById(req.params.id, function (err, user) {
         if (err)
             res.send(err);
-        const{ password, ...userWithoutPassword} = user[0];
-        res.json(userWithoutPassword);
+
+        if(user[0] !== undefined) {
+            const {password, ...userWithoutPassword} = user[0];
+            res.json(userWithoutPassword);
+        }
+
+        else{
+            res.json({"error":"The user with id "+req.params.id+" doesn't exist"})
+        }
     });
 };
 
