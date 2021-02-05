@@ -1,5 +1,6 @@
 'use strict';
 
+const passport = require('../passport/passport-config')
 const Contact = require('../models/contact.model');
 
 exports.findAll = function (req, res) {

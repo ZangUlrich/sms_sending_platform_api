@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
 
 const destinationController = require('../controllers/destination.controller');
+
+// authentication middleware
+router.use( passport.authenticate('jwt',{session: false}));
 
 // Retrieve all destinations
 router.get('/', destinationController.findAll);
@@ -13,5 +17,6 @@ router.get('/:id', destinationController.findById);
 router.put('/:id', destinationController.update);
 // Delete a destination with id
 router.delete('/:id', destinationController.delete);
+
 
 module.exports = router

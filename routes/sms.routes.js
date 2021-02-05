@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
 
 const smsController = require('../controllers/sms.controller');
+
+// authentication middleware
+router.use(passport.authenticate('jwt',{session: false}));
 
 // Retrieve all smss
 router.get('/', smsController.findAll);

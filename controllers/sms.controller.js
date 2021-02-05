@@ -1,6 +1,7 @@
 'use strict';
 
 const Sms = require('../models/sms.model');
+const passport = require('../passport/passport-config')
 
 exports.findAll = function (req, res) {
     Sms.findAll(function (err, sms) {
