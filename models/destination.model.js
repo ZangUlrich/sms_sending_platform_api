@@ -59,4 +59,43 @@ Destination.delete = function (id, result) {
         }
     });
 };
+
+Destination.getContactsGroupMessage = function (result){
+    dbConn.query("SELECT contact.id AS contact_id, contact.name, sms.message, sms.sending_date\n" +
+        "FROM contact\n" +
+        "INNER JOIN destination ON destination.id_contact = contact.id\n" +
+        "INNER JOIN sms ON destination.id_sms = sms.id\n" +
+        "HAVING sms.sending_date IN (\n" +
+        "    SELECT MAX(sms.sending_date)\n" +
+        "    FROM sms\n" +
+        "     INNER JOIN destination ON destination.id_sms = sms.id\n" +
+        "    INNER JOIN contact ON contact.id = destination.id_contact\n" +
+        "    WHERE contact.id = contact_id)", function (err,res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        } else {
+            result(null, res);
+        }
+    })
+}
+
+Destination.getMessagesForGroupContact= function (contact_id,result){
+    dbConn.query("SELECT sms.id, sms.message, sms.sending_date \n" +
+        "FROM sms WHERE sms.id IN (\n" +
+        "  SELECT sms.id \n" +
+        "    FROM destination\n" +
+        "    INNER JOIN sms ON sms.id=destination.id_sms\n" +
+        "    INNER JOIN contact ON contact.id=destination.id_contact\n" +
+        "    WHERE contact.id=?\n" +
+        "\n" +
+        ")", contact_id, function (err,res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        } else {
+            result(null, res);
+        }
+    })
+}
 module.exports = Destination;

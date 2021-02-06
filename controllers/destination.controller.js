@@ -56,3 +56,21 @@ exports.delete = function (req, res) {
         res.json({error: false, message: 'destination successfully deleted'});
     });
 };
+
+exports.getContactsGroupMessage = function (req, res){
+    Destination.getContactsGroupMessage(function (err,result){
+        if (err)
+            res.send(err);
+        console.log(result)
+        res.json(result)
+    })
+};
+
+exports.getMessagesForGroupContact = function (req, res){
+    Destination.getMessagesForGroupContact(req.params.contact_id, function (err,result){
+        if (err)
+            res.send(err);
+        console.log(result)
+        res.json(result)
+    })
+};

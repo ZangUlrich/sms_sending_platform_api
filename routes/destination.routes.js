@@ -7,6 +7,10 @@ const destinationController = require('../controllers/destination.controller');
 // authentication middleware
 router.use( passport.authenticate('jwt',{session: false}));
 
+//
+router.get('/contacts_messages', destinationController.getContactsGroupMessage);
+
+router.get('/messages_for_contact/:contact_id',destinationController.getMessagesForGroupContact)
 
 // Retrieve all destinations
 router.get('/', destinationController.findAll);
